@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title></title>
+
+	<link rel="stylesheet" href="css/global.css" />
+	<script type="text/javascript" src="external/jquery-3-5-1.min.js"></script>
+	<script type="text/javascript" src="bundle.js"></script>
+
+	<link rel="stylesheet" href="external/bootstrap.min.css" />
+
+	<script src="external/popper.min.js"></script>
+	<script src="external/bootstrap.min.js"></script>
+
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+	<link rel="stylesheet" href="external/w3.css">
+</head>
+	<body>
+		<div id="mobile-rejection" class="center-content" style="width: 100%; height: 100%; text-align: center; display: none;flex-direction:column;">
+			<p>This study is meant to be conducted on a computer.</p>
+			<p>Please open this study on a desktop computer or laptop.</p>
+		</div>
+		<div id="transition" class="center-content transition" style="text-align: center; display: none;">
+			<div>
+				<div id="confidence-bar" style="position: relative; display:flex; justify-content: center;">
+					<div style="display: flex; justify-content: flex-end; flex: 1;">
+						<span style="position: absolute; bottom: 0;">Low</span>
+					</div>
+					<div style="flex: 8">
+						<p style="text-align: center;">Please rate your overall level of confidence in your performance for the previous set of tests.</p>
+						<input type="range" class="custom-range" id="confidence" style="width: 100%;" />
+					</div>
+					<div style="flex: 1">
+						<span style="position: absolute; bottom: 0;">High</span>
+					</div>
+				</div>
+				
+				<hr />
+
+				<div id="next-test-ready">
+					The next test is ready.
+					<div class="center-content">
+						<div id="begin-test" class="w3-button w3-green">Begin &raquo;</div>
+					</div>
+				</div>
+
+				<div id="next-test-loading" class="center-content" style=" flex-direction: column;">
+					<div>The next test is loading, please wait.</div>
+					<div class="loader"></div> 
+				</div>
+
+				<div id="loading-failed" class="center-content" style="flex-direction: column;">
+					<div>Failed to load the next test.</div>
+					<div id="retry-loading" class="submit">Retry &raquo;</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div style="display: flex; flex-direction: column; height: 100%;"> -->
+			<div id="header">
+				<div style="display: flex;">
+					<div id="test-progress" style="flex: 1; text-align: center; vertical-align: middle;" class="title-colors"></div>
+					<h1 style="margin: 0px; width: 80%;" id="title"></h1>
+					<div style="flex: 1" class="title-colors"></div>
+				</div>
+				
+				<div class="progress" style="width: 100%;">
+					<div id="test-timer"
+						class="progress-bar"
+						role="progressbar"
+						style="transition: width .1s linear;"
+						aria-valuenow="0"
+						aria-valuemin="0"
+						aria-valuemax="100"
+					>
+					</div>
+				</div>
+			</div>
+	
+			<div id="content">
+				<div id="content-single" class="flex-container" style="flex-direction: column; display: none;">
+				</div>
+				
+				<div id="comparison-area" class="flex-container" style="display:none;">
+					<div id="test-original" class="test-container" style="align-items: flex-end;"></div>
+					<div id="test-compare" class="test-container" style="align-items: flex-start;"></div>
+				</div>
+
+				<div style="margin-top: 5px; margin-bottom: 5px;">
+					<div id="prompt"></div>
+					<div id="options"></div>
+					
+				</div>
+			</div>
+	
+			<div id="footer" class="center-content" style="flex-direction:column;">
+				<div id="Errors" style="color: red;"></div>
+				<button id="submit-test" class="w3-button w3-green submit" style="display: none;">Submit &raquo;</button>
+			</div>
+			
+		<!-- </div> -->
+	</body>
+</html>

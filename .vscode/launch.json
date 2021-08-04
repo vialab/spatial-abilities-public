@@ -1,0 +1,53 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Server",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"program": "${workspaceFolder}/backend/index.js",
+			"cwd": "${workspaceFolder}/backend"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Mocha Current File (Backend)",
+			"program": "${workspaceFolder}/backend/node_modules/mocha/bin/_mocha",
+			"args": [
+				"--no-timeouts",
+				"--colors",
+				"${file}"
+			],
+			"skipFiles": [
+				"backend/node_modules/**/*",
+				"<node_internals>/**"
+			],
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Mocha All (Backend)",
+			"program": "${workspaceFolder}/backend/node_modules/mocha/bin/_mocha",
+			"args": [
+				"--no-timeouts",
+				"--colors",
+				"--recursive",
+				"${workspaceFolder}/backend/test"
+			],
+			"skipFiles": [
+				"backend/node_modules/**/*",
+				"<node_internals>/**"
+			],
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen"
+		}
+	]
+}

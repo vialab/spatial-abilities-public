@@ -1,0 +1,141 @@
+DROP TABLE IF EXISTS FailedSubmissionErrors;
+DROP TABLE IF EXISTS FailedSubmissions;
+
+DROP TABLE IF EXISTS Rotations;
+DROP TABLE IF EXISTS Options;
+DROP TABLE IF EXISTS Tests;
+
+DROP TABLE IF EXISTS EducationHistory;
+DROP TABLE IF EXISTS DemographicInformation;
+
+DROP TABLE IF EXISTS TestSessions;
+DROP TABLE IF EXISTS ClaimedIds;
+
+DROP TABLE IF EXISTS Compensation;
+
+DROP FUNCTION IF EXISTS IsFieldOfStudyFull;
+
+CREATE TABLE Compensation(
+	Email VARCHAR(150) PRIMARY KEY NOT NULL,
+	Name VARCHAR(250) NOT NULL,
+	Country VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE ClaimedIds(
+	Id INTEGER NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE TestSessions
+(
+	Id INTEGER PRIMARY KEY,
+	TaskOrderName VARCHAR(150) NOT NULL,
+	ScreenWidth INTEGER NOT NULL,
+	ScreenHeight INTEGER NOT NULL,
+	ScreenDpi DECIMAL NOT NULL,
+	TotalTime DECIMAL,
+	SubmissionDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE DemographicInformation
+(
+	Id SERIAL NOT NULL PRIMARY KEY,
+
+	SessionId INTEGER NOT NULL,
+
+	FieldOfstudy INTEGER NOT NULL,
+	
+	WorkplaceGraphicsImportance INTEGER NOT NULL,
+	WorkplaceGraphicsDescription TEXT NOT NULL DEFAULT '',
+	
+	WorkplaceDrawingsImportance INTEGER NOT NULL,
+	WorkplaceDrawingsDescription TEXT NOT NULL DEFAULT '',
+
+	VisualArtTimeSpent INTEGER NOT NULL,
+	VisualArtDescription TEXT NOT NULL DEFAULT '',
+
+	VideoGamesTimeSpent INTEGER NOT NULL,
+	VideoGamesDescription TEXT NOT NULL DEFAULT '',
+
+	Age INTEGER NOT NULL,
+	Gender VARCHAR(50) NOT NULL,
+
+	IsWorkplaceDrawingsUsed BOOLEAN NOT NULL,
+
+	CONSTRAINT session_survey FOREIGN KEY(SessionId) REFERENCES TestSessions(Id)
+);
+
+CREATE TABLE EducationHistory
+(
+	Id SERIAL NOT NULL PRIMARY KEY,
+	SessionId INTEGER NOT NULL,
+	Degree VARCHAR(100) NOT NULL,
+	Specialty VARCHAR(100) NOT NULL,
+	IsCompleted BOOLEAN NOT NULL,
+	Years NUMERIC NOT NULL DEFAULT 0,
+
+	CONSTRAINT session_education FOREIGN KEY(SessionId) REFERENCES TestSessions(Id)
+);
+
+CREATE TABLE Tests
+(
+	Id SERIAL NOT NULL PRIMARY KEY,
+	SessionId INTEGER NOT NULL,
+	Type INTEGER NOT NULL,
+	SortOrder INTEGER NOT NULL,
+	Duration DECIMAL NOT NULL,
+	UserConfidence INTEGER NOT NULL,
+	TechniquesUsed TEXT NOT NULL,
+	Metadata JSON NOT NULL DEFAULT '{}',
+	
+	CONSTRAINT test_session FOREIGN KEY(SessionId) REFERENCES TestSessions(Id)
+);
+
+CREATE TABLE Options
+(
+	Id SERIAL NOT NULL PRIMARY KEY,
+	TestId INTEGER NOT NULL,
+	Name VARCHAR(150) NOT NULL,
+	SelectedState INTEGER NOT NULL,
+	CorrectState INTEGER NOT NULL,
+	
+	CONSTRAINT fk_test_options FOREIGN KEY(TestId) REFERENCES Tests(Id)
+);
+
+CREATE TABLE Rotations
+(
+	Id SERIAL NOT NULL PRIMARY KEY,
+	TestId INTEGER NOT NULL,
+	InteractionNumber INTEGER NOT NULL,
+	SortIndex INTEGER NOT NULL,
+	DeltaTime DECIMAL NOT NULL,
+	InitialOffsetX DECIMAL NOT NULL,
+	InitialOffsetY DECIMAL NOT NULL,
+	RotationX DECIMAL NOT NULL,
+	RotationY DECIMAL NOT NULL,
+	
+	CONSTRAINT fk_test_rotations FOREIGN KEY(TestId) REFERENCES Tests(Id)
+);
+
+CREATE TABLE FailedSubmissions(
+	Id SERIAL NOT NULL PRIMARY KEY,
+	TestSession JSON
+);
+
+CREATE TABLE FailedSubmissionErrors(
+	Id SERIAL NOT NULL PRIMARY KEY,
+	SubmissionId INTEGER NOT NULL,
+	ErrorCode INTEGER NOT NULL,
+	Message TEXT NOT NULL DEFAULT '',
+
+	CONSTRAINT fk_resubmit_errors FOREIGN KEY(SubmissionId) REFERENCES FailedSubmissions(Id)
+);
+
+CREATE FUNCTION IsFieldOfStudyFull(IN field INTEGER, IN maximum INTEGER)
+RETURNS BOOLEAN AS
+$$
+DECLARE countInField INTEGER;
+BEGIN
+	SELECT COUNT(*) FROM DemographicInformation WHERE FieldOfStudy=field INTO countInField;
+	RETURN countInField >= maximum;
+END;
+$$ LANGUAGE plpgsql STABLE STRICT;

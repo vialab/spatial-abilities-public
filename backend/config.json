@@ -1,0 +1,13 @@
+{
+	"MaximumPerFieldOfStudy": 33,
+	"DatasetDirectory": "./datasets",
+	"HtmlLocation": "../frontend/src",
+	"SessionDumpDir": "./submit-dump",
+	"ContactDumpDir": "./submit-dump",
+
+	"Mail": {
+		"Server": "http://mail.science.uoit.ca/",
+		"Port": 25,
+		"NotifyEmail": "anthony.kouroupis@ontariotechu.net"
+	}
+}

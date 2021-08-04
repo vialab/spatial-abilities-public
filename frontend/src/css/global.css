@@ -1,0 +1,196 @@
+html, body
+{
+}
+
+#header
+{
+}
+
+#content
+{
+	flex: 8;
+	position:relative;
+	display: flex;
+	flex-direction: column;
+	min-height: 0px;
+}
+
+#footer
+{
+}
+
+#feedback
+{
+	flex: 1;
+}
+
+#title
+{
+	color: #0f0f1c;
+	background-color: #f0f0f7;
+	padding: 5px;
+	text-align: center;
+}
+
+.title-colors
+{
+	color: #0f0f1c;
+	background-color: #f0f0f7;
+}
+
+#content-single
+{
+	width: 100%;
+	min-height: 0px;
+	max-height: 100%;
+	flex: 9 2 auto;
+	
+	justify-content: center;
+	align-items: center;
+}
+
+#comparison-area
+{
+	flex:9;
+	min-height: 0px;
+	max-height: 100%;
+	
+	justify-content: center;
+	align-items: center;
+}
+
+#completion-window
+{
+	height: 100%;
+	width: 100%;
+
+	justify-content: center;
+	align-items: center;
+
+	flex-direction: column;
+}
+
+.flex-container
+{
+	display: flex;
+}
+
+.test-container
+{
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+
+	min-width: 500px;
+	min-height: 100%;
+
+	justify-content: center;
+}
+
+#prompt
+{
+	text-align: center;
+}
+
+#options
+{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#options>button
+{
+	flex:1;
+	margin: 2px;
+	min-width: 100px;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+#options>button:hover
+{
+	background-color: #ddd;
+}
+
+#submit-test
+{
+	margin: 25px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.submit
+{
+	/* cursor: pointer;
+	text-align: center; */
+	width: 80%;
+	height: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	/* height: 25px; */
+	/* background-color: #4CAF50;
+	color: white; */
+}
+
+.submit:hover
+{
+	background-color: #ddd;
+	color: black;
+}
+
+.overlay
+{
+	background-color: black;
+	opacity: 0.15;
+	width:100%;
+	height:100%;
+	
+	position: absolute;
+}
+
+.fit
+{
+	object-fit: contain;
+	max-width: 100%;
+}
+
+.center-content
+{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.transition
+{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: #e3e2e5;
+	z-index: 1;
+}
+
+.grid-select
+{
+	cursor: pointer;
+	border: solid 1px;
+}
+
+canvas
+{
+	border: solid 1px white;	
+}
+
+.loader {
+	border: 16px solid #f3f3f3; /* Light grey */
+	border-top: 16px solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}

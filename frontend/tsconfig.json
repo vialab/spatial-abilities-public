@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"lib": [
+			"DOM",
+			"ES6"
+		],
+		"removeComments": true,
+		"strict": true,
+		"allowJs": true,
+		"resolveJsonModule": true
+	},
+	"include": [
+		"./src/js"
+	],
+	"exclude": [
+		"**/*.js",
+		"node_modules"
+	]
+}

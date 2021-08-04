@@ -1,0 +1,42 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@turf/nearest-point-to-line": "^6.0.0",
+    "@turf/point-to-line-distance": "^6.0.0",
+    "@turf/turf": "^5.1.6",
+    "@types/d3": "^5.7.2",
+    "@types/delaunator": "^3.0.0",
+    "bowser": "^2.9.0",
+    "camera-controls": "^1.25.3",
+    "d3": "^5.16.0",
+    "delaunator": "^4.0.1",
+    "i": "^0.3.6",
+    "npm": "^6.14.8",
+    "three": "^0.118.3",
+    "three-orbitcontrols-ts": "^0.1.2",
+    "turf-isolines": "^3.0.12"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.3.38",
+    "browser-sync": "^2.26.7",
+    "browserify": "^16.5.1",
+    "gulp": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-uglify": "^3.0.2",
+    "http-proxy-middleware": "^1.0.5",
+    "tsify": "^4.0.1",
+    "typescript": "^3.9.7",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^3.11.1"
+  }
+}
